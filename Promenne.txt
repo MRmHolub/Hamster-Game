@@ -1,0 +1,115 @@
+pocet_krecku,pocet_pater_input,bludiste_y,bludiste_x,pocet_pater_bludiste ----> int
+v---> string input
+
+pocet_pater_input---> int pocet puvodne zadanych pater z inputu => slouzi pro spravne nacteni promenne znaky
+znaky---> list nacetlych tecek a hastagu ze zadani !Neodstranene zalomeni radku!NEUSPORADANE podle pater!
+
+indexy_pater_sestupne--->list se string hodnotami, urcujici spravne poradi podlazi(pater)
+bludiste_usp---> dict, usporadane bludiste(tecky,hastagy), klicem je patro, hodnota je list tecek a hastagu, predstavujici zdi a volny prostor, klic 0 oznacuje nejvyssi patro
+
+pocet_portalu--> int predstavujici pocet portalu v dane uloze
+portal---> dict, klicem je patro, index-->0=>nejvyssi patro, hodnotou je list souradnic portalu nachazejicih se v danem patre, souradnice jsou TUPLE
+
+pocet_krecku---> int pocet krecku v dane uloze
+kr---> promena krecek obsahuje souradnice krecku umistenych !!neseřazene!! nesedi cisla pater, pouze je to nacteni ze zadani
+krecci ---> serazena promena kr do dictionary, klicem je patro, hodnotou je souradnice krecku, klic-->0 => nejvysii patro
+pracovni_krecek_index_patro---> index urcujici nejvyssi patro obyvane kreckem
+pracovni_krecek_souradnice---> souradnice krecka/krecku v nejvyssim patre obyvanem kreckem(souradnice krecku v patre pracovni_krecek_patro)
+
+MAZE--> dict, klicem je patro, hodnota je list tuplu oznacujicich tecku v danem patre, ve formatu (0,2) --> nulty radek druhy sloupec je tecka
+list_maze--> list tuplu oznacujicich tecku v danem patre, ve formatu (0,2) --> nulty radek druhy sloupec je tecka
+papapapatro---> index for loopu urcujici klic k MAZE, s hodnotou patra
+cislo_radku-->cislo radku integer cast for loopu (y-souradnice)
+index_znaku_radku--> integer urcujici x-souradnici daneho radku
+
+_maze_ ---> dict, jsou odstraneny zbytecne vrchni patra--> pro efektivitu prace klic 0 oznacuje nejvyssi radek s kreckem, ostatni nejsou pro nasi ulohu dulezite, protoze krecci nechodi nahoru
+portal_comb --> list obsahujici listy obsahucici kombinace souradnic portalu
+
+
+
+
+
+
+
+    print(index_patra_schodiste)
+    schodiste[schod[int(index_patra_schodiste)]]=(int(schod[index_patra_schodiste+1]),int(schod[index_patra_schodiste+2]))
+    print(schodiste)
+
+
+
+
+
+
+
+
+    i_p_s+=[schod[index_patra_schodiste]]
+for index_y in range(1,len(schod),3):
+    i_y+=[schod[index_y]]
+for index_x in range(2, len(schod), 3):
+    i_x+=[schod[index_x]]
+
+
+
+for radek in range(pocet_schodist): #for loop v delce pracovnich portalu
+    pracovni_krecek_patro = min(krecci.keys())  # cislo nejvyssiho patra obydleneho kreckem, ma nejmensi index proto hledam min
+    pracovni_krecek_souradnice = krecci[pracovni_krecek_patro] #krecci v momentalne nejvyssim patre
+    delta=bludiste_usp[pracovni_krecek_patro] #jelikoz je to dictionary tak zadame index patra a vyjede nam cely bloktoho patra
+    print(delta)
+
+
+for krecci_podlazi in range(0,pocet_krecku,3):
+    pravdiva_pozice_patra = indexy_pater_sestupne.index(krecek[krecci_podlazi])
+    i_y = krecek[krecci_podlazi+1]
+    i_x = krecek[krecci_podlazi+2]
+    promenna += [(i_y, i_x)]
+    krecci[pravdiva_pozice_patra]=promenna
+print(krecci)
+
+
+
+
+    _maze_ = {}
+    #for k in range(pocet_pater_bludiste - pracovni_krecek_index_patro):
+     #   _maze_[k] = MAZE[pracovni_krecek_index_patro+k]  #klic 0 oznacuje nejvyssi radek s kreckem, ostatni nejsou pro nasi ulohu duleziti, protoze krecci stejnak nechodi nahoru
+    #print(f"Nyni budu praocvat v {_maze_}")
+
+
+    1 5 6 7
+#......
+.......
+.......
+.......
+.......
+.......
+.#.....
+.......
+.......
+.......
+.......
+.......
+..#....
+.......
+.......
+.......
+.......
+.......
+...#...
+.......
+.......
+.......
+.......
+.......
+....#..
+.......
+.......
+.......
+.......
+.......
+4 #pocet pracovnich pater
+3 2 1 0 #poradi pater
+3 #pocet pater ve kterych se vyskytuje portal
+1 1 1   #prvni cislo stanovuje kolik dvojic se nachazi v danem patre, druhe souradnice od nejvyssiho patra already usporadane
+2 2 2 4 4
+3 3 3 3 4 6 6
+2 #pocet krecku
+3 5 6 0 0 0 #patro,souradnice y, souradnice x
